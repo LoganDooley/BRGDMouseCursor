@@ -27,7 +27,7 @@ public class move : MonoBehaviour
     void FixedUpdate()
     {
         frame += 1;
-        if (frame == 10)
+        if (frame == 2)
         {
             frame = 0;
             mycollide.Add(Instantiate(colliders, player.position, Quaternion.identity));
