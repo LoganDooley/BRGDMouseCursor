@@ -13,6 +13,7 @@ public class move : MonoBehaviour
     private Vector3 moveto;
     private Vector3 mousepos;
     private List<Transform> mycollide;
+    public int trail_length = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +29,9 @@ public class move : MonoBehaviour
         {
             frame = 0;
             mycollide.Add(Instantiate(colliders, player.position, Quaternion.identity));
-            if (mycollide.Count > 22)
+            if (mycollide.Count > trail_length)
             {
+                Destroy(mycollide[0].gameObject);
                 mycollide.RemoveAt(0);
             }
         }

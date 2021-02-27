@@ -633,6 +633,7 @@ MonoBehaviour:
   speed: 10
   colliders: {fileID: 1982699031659218682, guid: b504af1e9aa47f643bab9367041eecbc, type: 3}
   frames_between: 10
+  trail_length: 5
 --- !u!212 &1992222902
 SpriteRenderer:
   m_ObjectHideFlags: 0
