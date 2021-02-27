@@ -37,8 +37,9 @@ public class move : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             moveto = new Vector3(mousepos.x, mousepos.y, 0f) - player.transform.position;
+            player.velocity = moveto.normalized * speed;
         }
-        player.velocity = moveto.normalized*speed;
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
