@@ -47,7 +47,7 @@ public class move : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         int index = mycollide.IndexOf(collision.gameObject.transform);
-        if(index != mycollide.Count && index != mycollide.Count - 1 && index != 0 && index != -1)
+        if(index != mycollide.Count - 1)
         {
             print(index);
         }
