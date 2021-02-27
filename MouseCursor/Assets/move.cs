@@ -14,6 +14,8 @@ public class move : MonoBehaviour
     private Vector3 mousepos;
     private List<Transform> mycollide;
     public int trail_length = 5;
+    public PolygonCollider2D polyCollider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,16 @@ public class move : MonoBehaviour
             player.velocity = moveto.normalized * speed;
         }
         
+    }
+
+    private void MakeCircle(int index)
+    {
+
+        List<Vector2> points = new List<Vector2>();
+        for (int i = index; i < mycollide.Count; i++)
+        {
+            points.Add(new Vector2(mycollide[index].position.x, mycollide[index].position.y));
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
