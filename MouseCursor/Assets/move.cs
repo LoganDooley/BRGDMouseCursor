@@ -12,7 +12,7 @@ public class move : MonoBehaviour
     private int frame = 0;
     private Vector3 moveto;
     private Vector3 mousepos;
-    private List<Transform> mycollide;
+    public List<Transform> mycollide;
     public int trail_length = 5;
     public PolygonCollider2D polyCollider;
 
@@ -30,7 +30,7 @@ public class move : MonoBehaviour
         if (frame == 2)
         {
             frame = 0;
-            mycollide.Add(Instantiate(colliders, player.position, Quaternion.identity));
+            mycollide.Add(Instantiate<Transform>(this.colliders, this.player.position, Quaternion.identity));
             if (mycollide.Count > trail_length)
             {
                 Destroy(mycollide[0].gameObject);
@@ -52,16 +52,26 @@ public class move : MonoBehaviour
         List<Vector2> points = new List<Vector2>();
         for (int i = index; i < mycollide.Count; i++)
         {
-            points.Add(new Vector2(mycollide[index].position.x, mycollide[index].position.y));
+            //print(mycollide[index].gameObject.transform.position);
+            points.Add(new Vector2(mycollide[i].gameObject.transform.position.x, mycollide[i].gameObject.transform.position.y));
         }
+        polyCollider.pathCount = 1;
+        polyCollider.SetPath(0, points);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         int index = mycollide.IndexOf(collision.gameObject.transform);
-        if(index != mycollide.Count - 1)
+        if (index != mycollide.Count - 1 && index >= 0)
         {
-            print(index);
+            this.MakeCircle(index);
+
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        
     }
 }
