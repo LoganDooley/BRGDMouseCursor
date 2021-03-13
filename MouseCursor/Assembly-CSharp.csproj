@@ -53,10 +53,15 @@
     <UnityVersion>2020.2.4f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\move.cs" />
-    <Compile Include="Assets\Timer.cs" />
+    <Compile Include="Assets\Scripts\move.cs" />
+    <Compile Include="Assets\Scripts\EnemyDeath.cs" />
+    <Compile Include="Assets\Scripts\Timer.cs" />
+    <Compile Include="Assets\Scripts\EnemySpawn.cs" />
+    <Compile Include="Assets\Enemy1Move.cs" />
+    <Compile Include="Assets\Points.cs" />
   </ItemGroup>
   <ItemGroup>
+     <None Include="Assets\Fonts\digital-dream\pizzadude.dk License.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:\Users\logan\Desktop\Unity\2020.2.4f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
