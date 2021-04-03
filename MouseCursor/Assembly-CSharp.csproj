@@ -53,12 +53,14 @@
     <UnityVersion>2020.2.4f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Points.cs" />
     <Compile Include="Assets\Scripts\move.cs" />
     <Compile Include="Assets\Scripts\EnemyDeath.cs" />
+    <Compile Include="Assets\EnemySpiral.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\EnemySpawn.cs" />
     <Compile Include="Assets\Enemy1Move.cs" />
-    <Compile Include="Assets\Points.cs" />
+    <Compile Include="Assets\SwitchScene.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\Fonts\digital-dream\pizzadude.dk License.txt" />
