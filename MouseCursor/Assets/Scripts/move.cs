@@ -13,8 +13,12 @@ public class move : MonoBehaviour
     private Vector3 moveto;
     private Vector3 mousepos;
     public List<Transform> mycollide;
-    public int trail_length = 5;
+    public int starting_length = 5;
     public PolygonCollider2D polyCollider;
+    private Vector2 lastPos;
+    private int trail_length;
+    public int inc_amt = 1; 
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +26,34 @@ public class move : MonoBehaviour
         moveto = new Vector3(0, 1, 0);
         mousepos = cam.ScreenToWorldPoint(Input.mousePosition);
         mycollide = new List<Transform>();
+        Cursor.visible = false;
+        this.trail_length = this.starting_length;
     }
+
+    public void IncTrail() {
+        this.trail_length = this.trail_length + 1;
+    }
+
+    public void ResetTrail()
+    {
+        int old_length = this.trail_length;
+        this.trail_length = this.trail_length  < this.starting_length ? this.trail_length : this.starting_length;
+        Timer timer = GameObject.Find("Timer").GetComponent<Timer>();
+        for (int i = trail_length; i < old_length; i++) {
+            timer.IncTimer();
+            Destroy(mycollide[i].gameObject);
+        }
+        this.mycollide.RemoveRange(this.trail_length, old_length - this.trail_length);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            this.ResetTrail();
+        }
+    }
+
 
     void FixedUpdate()
     {
@@ -30,19 +61,19 @@ public class move : MonoBehaviour
         if (frame == 2)
         {
             frame = 0;
-            mycollide.Add(Instantiate<Transform>(this.colliders, this.player.position, Quaternion.identity));
-            if (mycollide.Count > trail_length)
+            if (mycollide.Count < trail_length)
             {
-                Destroy(mycollide[0].gameObject);
-                mycollide.RemoveAt(0);
-            }
+                mycollide.Add(Instantiate<Transform>(this.colliders, this.player.position, Quaternion.identity));
+                if (mycollide.Count > 1) {
+                    mycollide[mycollide.Count - 1].GetComponent<TrailFollow>().target = mycollide[mycollide.Count - 2].transform;
+                } else {
+                    mycollide[mycollide.Count - 1].GetComponent<TrailFollow>().target = this.transform;
+                }
+                mycollide[mycollide.Count - 1].GetComponent<TrailFollow>().index = mycollide.Count - 1;
+            } 
         }
-        mousepos = cam.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0))
-        {
-            moveto = new Vector3(mousepos.x, mousepos.y, 0f) - player.transform.position;
-            player.velocity = moveto.normalized * speed;
-        }
+        this.player.position = cam.ScreenToWorldPoint(Input.mousePosition);
+        
         
     }
 
@@ -50,7 +81,7 @@ public class move : MonoBehaviour
     {
 
         List<Vector2> points = new List<Vector2>();
-        for (int i = index; i < mycollide.Count; i++)
+        for (int i = index; i >= 0; i--)
         {
             //print(mycollide[index].gameObject.transform.position);
             points.Add(new Vector2(mycollide[i].gameObject.transform.position.x, mycollide[i].gameObject.transform.position.y));
@@ -62,12 +93,19 @@ public class move : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        int index = mycollide.IndexOf(collision.gameObject.transform);
-        if (index != mycollide.Count - 1 && index >= 0)
+        TrailFollow trailItem = collision.GetComponent<TrailFollow>();
+        if (trailItem != null)
         {
+            /*
             polyCollider.gameObject.SetActive(true);
             this.MakeCircle(index);
-            StartCoroutine(deactivate());
+            StartCoroutine(deactivate());*/
+            int index = trailItem.index;
+            if (index != mycollide.Count - 1 && index >= 0)
+            {
+                this.MakeCircle(index);
+
+            }
         }
     }
 
@@ -81,4 +119,6 @@ public class move : MonoBehaviour
     {
         
     }
+
+    
 }

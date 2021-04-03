@@ -684,6 +684,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5186637615561052954, guid: 0daa5903a8e7d47dab1d4c83bc148e4c, type: 3}
+      propertyPath: sceneName
+      value: TimerAndTrail
+      objectReference: {fileID: 0}
     - target: {fileID: 6676108668295956946, guid: 0daa5903a8e7d47dab1d4c83bc148e4c, type: 3}
       propertyPath: m_Name
       value: SceneSwitch

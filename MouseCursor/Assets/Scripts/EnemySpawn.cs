@@ -13,7 +13,7 @@ public class EnemySpawn : MonoBehaviour
         float miny = spawnbox.transform.position.y - spawnbox.transform.localScale.y / 2;
         float maxx = spawnbox.transform.position.x + spawnbox.transform.localScale.x / 2;
         float maxy = spawnbox.transform.position.y + spawnbox.transform.localScale.y / 2;
-        Instantiate(enemies[0], new Vector3(Random.Range(minx, maxx), Random.Range(miny, maxy), 0), Quaternion.identity);
+        Instantiate(enemies[Random.Range(0, 2)], new Vector3(Random.Range(minx, maxx), Random.Range(miny, maxy), 0), Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -28,6 +28,6 @@ public class EnemySpawn : MonoBehaviour
         float miny = spawnbox.transform.position.y - spawnbox.transform.localScale.y / 2;
         float maxx = spawnbox.transform.position.x + spawnbox.transform.localScale.x / 2;
         float maxy = spawnbox.transform.position.y + spawnbox.transform.localScale.y / 2;
-        Instantiate(enemies[0], new Vector3(Random.Range(minx, maxx), Random.Range(miny, maxy), 0), Quaternion.identity);
+        Instantiate(enemies[Random.Range(0, 2)], new Vector3(Random.Range(minx, maxx), Random.Range(miny, maxy), 0), Quaternion.identity);
     }
 }

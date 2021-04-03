@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MichaelScene.unity
     guid: 9951f2c072d394ce9b48135d53adc880
+  - enabled: 1
+    path: Assets/Scenes/TimerIntegrate.unity
+    guid: 9534d983cad142240aa4a60429a33ce2
+  - enabled: 1
+    path: Assets/Scenes/TimerAndTrail.unity
+    guid: 5889252c1dd10497ca065bfae2b6bb22
   m_configObjects: {}

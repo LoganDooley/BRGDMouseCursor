@@ -22,6 +22,7 @@ public class EnemyDeath : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name == "circle") {
+            GameObject.Find("player").GetComponent<move>().IncTrail();
             Destroy(this.gameObject);
             spawn.GetComponent<EnemySpawn>().NewEnemy();
             pointsholder.GetComponent<Points>().AddPoints(100);
