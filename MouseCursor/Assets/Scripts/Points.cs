@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Points : MonoBehaviour
 {
-    private int points = 0;
+    static int points;
     // Start is called before the first frame update
     void Start()
     {
-        
+        DontDestroyOnLoad(gameObject);
+        points = 0;
     }
 
     // Update is called once per frame
@@ -20,5 +21,10 @@ public class Points : MonoBehaviour
     public void AddPoints(int pt)
     {
         points += pt;
+    }
+
+    public int GetPoints()
+    {
+        return points;
     }
 }

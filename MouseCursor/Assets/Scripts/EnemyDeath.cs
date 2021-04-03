@@ -5,13 +5,13 @@ using UnityEngine;
 public class EnemyDeath : MonoBehaviour
 {
     private GameObject spawn;
-    private GameObject player;
+    public GameObject pointsholder;
 
     // Start is called before the first frame update
     void Awake()
     {
         spawn = GameObject.Find("SpawnArea");
-        player = GameObject.Find("player");
+        pointsholder = GameObject.Find("PointsHolder");
     }
 
     // Update is called once per frame
@@ -24,7 +24,7 @@ public class EnemyDeath : MonoBehaviour
         if (collision.gameObject.name == "circle") {
             Destroy(this.gameObject);
             spawn.GetComponent<EnemySpawn>().NewEnemy();
-            player.GetComponent<Points>().AddPoints(100);
+            pointsholder.GetComponent<Points>().AddPoints(100);
         }
     }
 }
