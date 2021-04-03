@@ -124,8 +124,8 @@ TargetJoint2D:
   m_Target: {x: 0, y: 0}
   m_AutoConfigureTarget: 0
   m_MaxForce: 1000000
-  m_DampingRatio: 0.5
-  m_Frequency: 5
+  m_DampingRatio: 0.4
+  m_Frequency: 6
 --- !u!114 &55663498532085691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  index: 0
 --- !u!58 &1136611369465645059
 CircleCollider2D:
   m_ObjectHideFlags: 0

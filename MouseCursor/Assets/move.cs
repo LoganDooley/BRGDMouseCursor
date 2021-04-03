@@ -13,9 +13,12 @@ public class move : MonoBehaviour
     private Vector3 moveto;
     private Vector3 mousepos;
     public List<Transform> mycollide;
-    public int trail_length = 5;
+    public int starting_length = 5;
     public PolygonCollider2D polyCollider;
     private Vector2 lastPos;
+    private int trail_length;
+    public int inc_amt = 1; 
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +27,33 @@ public class move : MonoBehaviour
         mousepos = cam.ScreenToWorldPoint(Input.mousePosition);
         mycollide = new List<Transform>();
         Cursor.visible = false;
+        this.trail_length = this.starting_length;
     }
+
+    public void IncTrail() {
+        this.trail_length = this.trail_length + 1;
+    }
+
+    public void ResetTrail()
+    {
+        int old_length = this.trail_length;
+        this.trail_length = this.trail_length  < this.starting_length ? this.trail_length : this.starting_length;
+        Timer timer = GameObject.Find("Timer").GetComponent<Timer>();
+        for (int i = trail_length; i < old_length; i++) {
+            timer.IncTimer();
+            Destroy(mycollide[i].gameObject);
+        }
+        this.mycollide.RemoveRange(this.trail_length, old_length - this.trail_length);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            this.ResetTrail();
+        }
+    }
+
 
     void FixedUpdate()
     {
@@ -41,20 +70,10 @@ public class move : MonoBehaviour
                     mycollide[mycollide.Count - 1].GetComponent<TrailFollow>().target = this.transform;
                 }
                 mycollide[mycollide.Count - 1].GetComponent<TrailFollow>().index = mycollide.Count - 1;
-            }
-            //if (mycollide.Count > trail_length)
-            //{
-            //    Destroy(mycollide[0].gameObject);
-            //    mycollide.RemoveAt(0);
-            //}
+            } 
         }
         this.player.position = cam.ScreenToWorldPoint(Input.mousePosition);
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    //moveto = new Vector3(mousepos.x, mousepos.y, 0f) - player.transform.position;
-        //    //player.velocity = moveto.normalized * speed;
-        //     = new Vector3(mousepos.x, mousepos.y, 0f);
-        //}
+        
         
     }
 
@@ -69,17 +88,20 @@ public class move : MonoBehaviour
         }
         polyCollider.pathCount = 1;
         polyCollider.SetPath(0, points);
-        print("Making Circle!!!" + index);
 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        int index = collision.GetComponent<TrailFollow>().index;
-        if (index != mycollide.Count - 1 && index >= 0)
+        TrailFollow trailItem = collision.GetComponent<TrailFollow>();
+        if (trailItem != null)
         {
-            this.MakeCircle(index);
+            int index = trailItem.index;
+            if (index != mycollide.Count - 1 && index >= 0)
+            {
+                this.MakeCircle(index);
 
+            }
         }
     }
 
@@ -87,4 +109,6 @@ public class move : MonoBehaviour
     {
         
     }
+
+    
 }

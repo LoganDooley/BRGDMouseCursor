@@ -10,6 +10,8 @@ public class Timer : MonoBehaviour
     public float currentTime = 0f; //variable that gets manipulated
     public float startingTime = 0f; //starting variable, is edited in unity.
     public int seconds; //actual value that gets printed
+    public float incAmt = 5.0f; //amount to increment timer per trail item
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +24,7 @@ public class Timer : MonoBehaviour
     void Update()
     {
         currentTime -= Time.deltaTime;
-        seconds = (int)(currentTime % 60);
+        seconds = (int)(currentTime);
         
        //this code just makes sure that the timer doesn't count down into negative numbers
         if (seconds < 0){
@@ -33,5 +35,12 @@ SceneManager.LoadScene (sceneName:"GameOver");
         }
         timeLeft.text = "Time Left: " + seconds;
 
+    }
+
+    public void IncTimer() {
+        print("increasing..");
+        print(currentTime);
+        currentTime += this.incAmt;
+        print(currentTime);
     }
 }
