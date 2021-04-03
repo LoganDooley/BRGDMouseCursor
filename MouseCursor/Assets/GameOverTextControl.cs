@@ -14,6 +14,6 @@ public class GameOverTextControl : MonoBehaviour
         Cursor.visible = true;
         myCarrierObject = GameObject.Find("PointsHolder");
         int points = myCarrierObject.GetComponent<Points>().GetPoints();
-        myText.text = "Game Over | Final Score: " + points;
+        myText.text = "FINAL SCORE: " + points;
     }
 }
