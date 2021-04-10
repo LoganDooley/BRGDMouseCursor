@@ -6,6 +6,7 @@ public class TrailFollow : MonoBehaviour
 {
     public Transform target;
     public int index = 0;
+    public float maxDist;
 
     // Start is called before the first frame update
     void Start()
@@ -18,5 +19,8 @@ public class TrailFollow : MonoBehaviour
     {
         TargetJoint2D joint = this.GetComponent<TargetJoint2D>();
         joint.target = target.position;
+        if (Vector3.Distance(target.position, this.transform.position) > maxDist) {
+            this.transform.position = target.position + (maxDist * Vector3.Normalize(this.transform.position - target.position));
+        }
     }
 }

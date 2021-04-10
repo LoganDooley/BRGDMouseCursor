@@ -526,7 +526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6434471808864462594, guid: c00a87c7431244fa6a7cbae15c305242, type: 3}
       propertyPath: startingTime
-      value: 10
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 6434471808864462595, guid: c00a87c7431244fa6a7cbae15c305242, type: 3}
       propertyPath: m_Text
@@ -1257,7 +1257,7 @@ MonoBehaviour:
   colliders: {fileID: 55663498532085694, guid: f71ecf596517b451bbe4e9933f5bb517, type: 3}
   frames_between: 10
   mycollide: []
-  starting_length: 8
+  starting_length: 20
   polyCollider: {fileID: 1788152455}
   inc_amt: 1
 --- !u!212 &1992222902
