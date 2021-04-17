@@ -10,7 +10,6 @@ public class Enemy1Move : MonoBehaviour
     void Awake()
     {
         player = GameObject.Find("player");
-        print(player);
     }
 
     // Update is called once per frame

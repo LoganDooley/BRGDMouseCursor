@@ -21,6 +21,7 @@ public class TrailFollow : MonoBehaviour
         joint.target = target.position;
         if (Vector3.Distance(target.position, this.transform.position) > maxDist) {
             this.transform.position = target.position + (maxDist * Vector3.Normalize(this.transform.position - target.position));
+            //this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
         }
     }
 }
