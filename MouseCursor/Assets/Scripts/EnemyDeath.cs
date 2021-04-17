@@ -5,13 +5,20 @@ using UnityEngine;
 public class EnemyDeath : MonoBehaviour
 {
     private GameObject spawn;
+    private bool dying;
     public GameObject pointsholder;
 
     // Start is called before the first frame update
+    void Start()
+    {
+        this.dying = false;
+    }
+
     void Awake()
     {
         spawn = GameObject.Find("SpawnArea");
         pointsholder = GameObject.Find("PointsHolder");
+        
     }
 
     // Update is called once per frame
@@ -21,11 +28,37 @@ public class EnemyDeath : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "circle") {
+        if (collision.gameObject.name == "circle" && !this.dying)
+        {
+            this.dying = true;
             GameObject.Find("player").GetComponent<move>().IncTrail();
             Destroy(this.gameObject);
             spawn.GetComponent<EnemySpawn>().NewEnemy();
             pointsholder.GetComponent<Points>().AddPoints(100);
         }
+        else if (collision.gameObject.tag == "trail" && !this.dying) {
+            this.dying = true;
+            print("starting collision with trail");
+            GameObject.Find("player").GetComponent<move>().DecTrail();
+            //print("colliding with trail");
+            Destroy(this.gameObject);
+            spawn.GetComponent<EnemySpawn>().NewEnemy();
+            print("ending collision with trail");
+        }
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "player" && !this.dying) {
+            this.dying = true;
+            print("starting collision with player");
+            collision.gameObject.GetComponent<move>().DecTrail();
+            Destroy(this.gameObject);
+            spawn.GetComponent<EnemySpawn>().NewEnemy();
+            print("ending collision with player");
+        }
+        
+
     }
 }

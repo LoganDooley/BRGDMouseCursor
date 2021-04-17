@@ -16,7 +16,7 @@ public class move : MonoBehaviour
     public int starting_length = 5;
     public PolygonCollider2D polyCollider;
     private Vector2 lastPos;
-    private int trail_length;
+    public int trail_length;
     public int inc_amt = 1; 
 
 
@@ -32,6 +32,21 @@ public class move : MonoBehaviour
 
     public void IncTrail() {
         this.trail_length = this.trail_length + 1;
+    }
+
+    public void DecTrail() {
+
+        if (this.trail_length > this.starting_length) {
+            this.trail_length = this.trail_length - 1;
+            if (this.mycollide.Count > this.trail_length)
+            {
+                Destroy(this.mycollide[this.trail_length].gameObject);
+                this.mycollide.RemoveAt(this.trail_length);
+            }
+            
+        }
+         
+
     }
 
     public void ResetTrail()
@@ -52,6 +67,32 @@ public class move : MonoBehaviour
         {
             this.ResetTrail();
         }
+        this.player.position = cam.ScreenToWorldPoint(Input.mousePosition);
+        // getting camera corners to keep mouse on screen
+        Vector3 topRight = cam.ViewportToWorldPoint(new Vector3(1, 1, cam.nearClipPlane));
+        Vector3 botLeft = cam.ViewportToWorldPoint(new Vector3(0, 0, cam.nearClipPlane));
+
+        if (this.player.position.x > topRight.x)
+        {
+            this.player.position = new Vector2(topRight.x, this.player.position.y);
+
+        }
+        if (this.player.position.y > topRight.y)
+        {
+            this.player.position = new Vector2(this.player.position.x, topRight.y);
+
+        }
+        if (this.player.position.x < botLeft.x)
+        {
+            this.player.position = new Vector2(botLeft.x, this.player.position.y);
+
+        }
+        if (this.player.position.y < botLeft.y)
+        {
+            this.player.position = new Vector2(this.player.position.x, botLeft.y);
+
+        }
+
     }
 
 
@@ -72,14 +113,16 @@ public class move : MonoBehaviour
                 mycollide[mycollide.Count - 1].GetComponent<TrailFollow>().index = mycollide.Count - 1;
             } 
         }
-        this.player.position = cam.ScreenToWorldPoint(Input.mousePosition);
         
-        
+
+
     }
 
     private void MakeCircle(int index)
     {
-
+        if (index >= mycollide.Count) {
+            index = mycollide.Count - 1 ;
+        }
         List<Vector2> points = new List<Vector2>();
         for (int i = index; i >= 0; i--)
         {
