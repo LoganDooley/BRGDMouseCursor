@@ -6,14 +6,12 @@ public class EnemySpawn : MonoBehaviour
 {
     public GameObject[] enemies = new GameObject[5];
     public GameObject spawnbox;
+    private Transform player;
     // Start is called before the first frame update
     void Start()
     {
-        float minx = spawnbox.transform.position.x - spawnbox.transform.localScale.x / 2;
-        float miny = spawnbox.transform.position.y - spawnbox.transform.localScale.y / 2;
-        float maxx = spawnbox.transform.position.x + spawnbox.transform.localScale.x / 2;
-        float maxy = spawnbox.transform.position.y + spawnbox.transform.localScale.y / 2;
-        Instantiate(enemies[Random.Range(0, 4)], new Vector3(Random.Range(minx, maxx), Random.Range(miny, maxy), 0), Quaternion.identity);
+        player = GameObject.Find("player").transform;
+        NewEnemy();
     }
 
     // Update is called once per frame
@@ -24,10 +22,16 @@ public class EnemySpawn : MonoBehaviour
 
     public void NewEnemy()
     {
+
         float minx = spawnbox.transform.position.x - spawnbox.transform.localScale.x / 2;
         float miny = spawnbox.transform.position.y - spawnbox.transform.localScale.y / 2;
         float maxx = spawnbox.transform.position.x + spawnbox.transform.localScale.x / 2;
         float maxy = spawnbox.transform.position.y + spawnbox.transform.localScale.y / 2;
-        Instantiate(enemies[Random.Range(0, 4)], new Vector3(Random.Range(minx, maxx), Random.Range(miny, maxy), 0), Quaternion.identity);
+        Vector3 pos = new Vector3(Random.Range(minx, maxx), Random.Range(miny, maxy), 0);
+        while (Vector3.Distance(pos, player.position) < 6.0) {
+            pos = new Vector3(Random.Range(minx, maxx), Random.Range(miny, maxy), 0);
+        }
+        print(Vector3.Distance(pos, player.position));
+        Instantiate(enemies[Random.Range(0, 4)], pos, Quaternion.identity);
     }
 }
