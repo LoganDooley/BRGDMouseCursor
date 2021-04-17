@@ -366,10 +366,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 4924051041757538161, guid: ae3f8fcaba91b3f479857dd5cd737cb0, type: 3}
-  - {fileID: 6686126526771128182, guid: 4bbba8c27a7fc444e872376fbdfbe167, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 6247841679513684246, guid: 3ee64a549ec77e948a6998f0672fbd4a, type: 3}
+  - {fileID: 7130027185027121585, guid: e659869ec2420f84db0c4fe3b5c4fb71, type: 3}
+  - {fileID: 1714927147945275386, guid: 2955e92e1614e414a9699579f3ca4982, type: 3}
+  - {fileID: 6443210300749079379, guid: 8507c2762033d0245b9525163a6d06ec, type: 3}
   - {fileID: 0}
   spawnbox: {fileID: 662706042}
 --- !u!212 &662706044
