@@ -17,7 +17,8 @@ public class move : MonoBehaviour
     public PolygonCollider2D polyCollider;
     private Vector2 lastPos;
     public int trail_length;
-    public int inc_amt = 1; 
+    public int inc_amt = 1;
+    private AudioSource cashoutSound;
 
 
     // Start is called before the first frame update
@@ -28,6 +29,7 @@ public class move : MonoBehaviour
         mycollide = new List<Transform>();
         Cursor.visible = false;
         this.trail_length = this.starting_length;
+        cashoutSound = GameObject.Find("Cashout Sound").GetComponent<AudioSource>();
     }
 
     public void IncTrail() {
@@ -54,6 +56,9 @@ public class move : MonoBehaviour
         int old_length = this.trail_length;
         this.trail_length = this.trail_length  < this.starting_length ? this.trail_length : this.starting_length;
         Timer timer = GameObject.Find("Timer").GetComponent<Timer>();
+        if (trail_length < old_length) {
+            cashoutSound.Play();
+        }
         for (int i = trail_length; i < old_length; i++) {
             timer.IncTimer();
             Destroy(mycollide[i].gameObject);
