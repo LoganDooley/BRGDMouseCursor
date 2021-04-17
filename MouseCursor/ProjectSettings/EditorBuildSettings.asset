@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TimerAndTrail.unity
     guid: 5889252c1dd10497ca065bfae2b6bb22
+  - enabled: 1
+    path: Assets/Scenes/TutorialTransition.unity
+    guid: 7b4e3c38a9e8fbe4083a9a92d97d41d4
   m_configObjects: {}
