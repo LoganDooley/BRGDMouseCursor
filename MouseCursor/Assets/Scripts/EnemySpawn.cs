@@ -12,12 +12,20 @@ public class EnemySpawn : MonoBehaviour
     {
         player = GameObject.Find("player").transform;
         NewEnemy();
+        StartCoroutine(SpawnAfterTime(30.0f));
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    IEnumerator SpawnAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        NewEnemy();
+        
     }
 
     public void NewEnemy()
@@ -28,7 +36,7 @@ public class EnemySpawn : MonoBehaviour
         float maxx = spawnbox.transform.position.x + spawnbox.transform.localScale.x / 2;
         float maxy = spawnbox.transform.position.y + spawnbox.transform.localScale.y / 2;
         Vector3 pos = new Vector3(Random.Range(minx, maxx), Random.Range(miny, maxy), 0);
-        while (Vector3.Distance(pos, player.position) < 6.0) {
+        while (Vector3.Distance(pos, player.position) < 5.5) {
             pos = new Vector3(Random.Range(minx, maxx), Random.Range(miny, maxy), 0);
         }
         print(Vector3.Distance(pos, player.position));

@@ -38,14 +38,19 @@ public class move : MonoBehaviour
 
     public void DecTrail() {
 
-        if (this.trail_length > this.starting_length) {
+        if (this.trail_length > this.starting_length)
+        {
             this.trail_length = this.trail_length - 1;
             if (this.mycollide.Count > this.trail_length)
             {
                 Destroy(this.mycollide[this.trail_length].gameObject);
                 this.mycollide.RemoveAt(this.trail_length);
             }
-            
+
+        }
+        else {
+            Timer timer = GameObject.Find("Timer").GetComponent<Timer>();
+            timer.DecTimer();
         }
          
 

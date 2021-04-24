@@ -35,11 +35,11 @@ public class Timer : MonoBehaviour
         }
         if(seconds > 9)
         {
-            timeLeft.text = "Time Left: " + "0:" + seconds;
+            timeLeft.text = "Time Left: " + seconds;
         }
         else
         {
-            timeLeft.text = "Time Left: " + "0:0" + seconds;
+            timeLeft.text = "Time Left: " + seconds;
         }
     }
 
@@ -48,5 +48,9 @@ public class Timer : MonoBehaviour
         print(currentTime);
         currentTime += this.incAmt;
         print(currentTime);
+    }
+
+    public void DecTimer() {
+        currentTime -= this.incAmt;
     }
 }
